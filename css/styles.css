@@ -1,0 +1,92 @@
+/* .container{
+    display: grid;
+    width: 100%;
+    grid-template-areas: "nav"
+                         "jumbotron"
+                         "artist"
+                         "events"
+                         "footer";
+    grid-template-rows: 50px 2fr 3fr 1fr  50px;
+} */
+
+ul, ol {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+    display: inline-block;
+}
+
+header{
+    display: flex;
+    justify-content: space-between;
+}
+
+/* NAVBAR */
+
+input#menu{
+    display: none;
+}
+
+nav{
+    /* padding: 20px; */
+}
+
+nav a{
+    display: block;
+    text-decoration: none;
+    padding: 10px;
+}
+
+nav label{
+    display: block;
+    cursor: pointer;
+    /* padding: 20px 0 20px 60px; */
+
+}
+
+nav label{
+    margin: auto;
+}
+
+/* TOGGLE EFFECT */
+
+.menu-content{
+    max-height: 0;
+    overflow: hidden;
+}
+
+input:checked~ .menu-content{
+    max-height: 100%;
+}
+
+/* //NAVBAR */
+
+.logo img{
+    width: 50px;
+    display: inline-block;
+}
+
+.jumbotron {
+    background: #0F0;
+    grid-area: jumbotron;
+}
+
+.artists {
+    background: #00F;
+    grid-area: artist;
+}
+
+.events{
+    background: #FF0;
+    grid-area: events;
+}
+
+.footer{
+    background: #0FF;
+    grid-area: footer;
+}
+
