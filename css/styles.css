@@ -23,6 +23,9 @@ a {
 header{
     display: flex;
     justify-content: space-between;
+    background-color: rgba(0,0,0,.6);
+    grid-template-areas: repeat (auto-fit, minmax(200px, 1Fr));
+    height: 45px;
 }
 
 /* NAVBAR */
@@ -66,27 +69,36 @@ input:checked~ .menu-content{
 /* //NAVBAR */
 
 .logo img{
-    width: 50px;
+    width: 150px;
     display: inline-block;
+    justify-content: space-around;
 }
 
 .jumbotron {
-    background: #0F0;
-    grid-area: jumbotron;
+    grid-template-areas: repeat (auto-fit, minmax(200px, 1Fr));
+    background: #5C535C
+}
+.jumbotron img{
+  width: 100%
 }
 
 .artists {
-    background: #00F;
-    grid-area: artist;
+    grid-template-areas: repeat (auto-fit, minmax(200px, 1Fr));
+    background-color: #5C535C;
+}
+.artists img{
+  width: 100%;
 }
 
 .events{
-    background: #FF0;
-    grid-area: events;
+    grid-template-areas: repeat (auto-fit, minmax(200px, 1Fr));
+    background-color: #5C535C;
+}
+.events img{
+  width: 100%;
 }
 
 .footer{
+    grid-template-areas: repeat (auto-fit, minmax(200px, 1Fr));
     background: #0FF;
-    grid-area: footer;
 }
-
