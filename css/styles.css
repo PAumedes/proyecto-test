@@ -5,10 +5,16 @@
   box-sizing: border-box;
 }
 
+ ol, ul,li{
+  list-style: none;
+}
+
 body {
   font-family: 'Montserrat', sans-serif;
 }
-header {
+
+
+.navbar {
   width: 100%;
   height: 50px;
   background: #e3e3e3;
@@ -22,9 +28,9 @@ header {
   width: 98%;
   margin:auto;
 }
-h1 {
+/* h1 {
   float: left;
-}
+} */
 header .contenedor{
   display: table;
 }
@@ -32,31 +38,68 @@ section{
   width: 100%;
   margin-bottom: 25px;
 }
+.banner{
+  background-image: url(../images/fiesta.jpg);
+  display: flex;
+  flex-wrap: wrap;
+  overflow: hidden;
+}
+
 .artistas{
   text-align: center;
 }
 .eventos{
   text-align: center;
 }
-@media (min-width:1024px){
-  .contenedor{
-    width: 1100px;
-  }
+
+.banner-button{
+  white-space:normal;
+  display: block;
+  color: #fff;
+  height: 50px;
+  text-decoration: none;
+  padding: 15px;
+  border-bottom: 1px solid rgba(255,255,255,0.5);
+  margin-top: 10px;
+  border: 3px solid #fff;
 }
+.navlink{
+  display: block;
+  color: #89bdd3;
+  height: 50px;
+  text-decoration: none;
+  padding: 15px;
+  border-bottom: 1px solid rgba(255,255,255,0.5);
+}
+
+.menu li, ul{
+  list-style: none;
+}
+.banner-button:hover{
+  background: rgba(255,255,255,0.3);
+}
+
+
+
+
+
 
 /* MENU ¨*/
 #menu-bar {
   display: none;
 }
+
 header label{
   float: right;
   font-size: 28px;
   margin-left: 6px 0;
   cursor: pointer;
 }
+
 .logo{
   max-width: 160px;
 }
+
 .menu{
   position: absolute;
   top: 50px;
@@ -67,42 +110,13 @@ header label{
   transition: all 0.5s;
   transform: translateX(-100%);
 }
-.menu a{
-  display: block;
-  color: #89bdd3;
-  height: 50px;
-  text-decoration: none;
-  padding: 15px;
-  border-bottom: 1px solid rgba(255,255,255,0.5);
-}
-.menu li, ul{
-  list-style: none;
-}
-.menu a:hover{
-  background: rgba(255,255,255,0.3);
-}
+
+
+
  #menu-bar:checked ~ .menu{
    transform: translateX(0%);
  }
-@media (min-width:1024px){
-  .menu{
-    position: static;
-    width: auto;
-    height: auto;
-    transform: translateX(0%);
-    float: right;
-    display: flex;
-  }
-  .menu ul{
-    display: flex;
-  }
-  header label{
-    display: none;
-  }
-  .menu a{
-    border: none;
-  }
-}
+
 
 /* BANNER */
 #banner {
@@ -123,26 +137,9 @@ header label{
 #banner h2 {
   font-size: 28px;
 }
-#banner a {
-  width: 100px;
-  display: inline-block;
-  text-decoration: none;
-  color: #fff;
-  padding: 20px;
-  margin-top: 10px;
-  border: 3px solid #fff;
-}
-#banner a:hover{
-background: rgba(51,51,51,0.5);
-}
-@media(min-width:480px){
-  #banner h2{
-    font-size: 40px;
-  }
-  #banner a{
-    margin-top: 25px;
-  }
-}
+
+
+
 
 
 /* ARTISTAS */
@@ -181,12 +178,14 @@ background: rgba(51,51,51,0.5);
 #eventos article{
   margin: 20px;
 }
+
 #eventos img{
   width: 180px;
   height: 180px;
   border-radius: 50%;
   border: 7px solid #fff;
 }
+
 #eventos h4{
   text-align: center;
   max-width: 280px;
@@ -220,11 +219,120 @@ footer .contenedor{
   text-decoration: none;
 }
 
+
+.menu li, ul{
+  list-style: none;
+}
+
+/*Agregador por Rodrigo para PERFIL.PHP..*/
+
+.error-message{
+  font-style: italic;
+  color: #d7011c;
+  font-size: 0.8em;
+}
+
+.pag-perfil{
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: flex-start;
+}
+
+.row{
+	width: 100vw;
+	margin: -1;
+	display: flex;
+}
+.justify-content-center{.menu li, ul{
+  list-style: none;
+}
+	justify-content: center;
+}
+
+.avatar{
+  width: 300px;
+  height: 300px;
+	margin-bottom: 15px;
+	border-radius: 50%;
+	border: 1px, solid #464e47;
+	overflow: hidden;
+}
+
+.form-perfil{
+	width: 90vw;
+	padding: 15px;
+	display: grid;
+	grid-gap: 15px;.menu a{
+  display: block;
+  color: #89bdd3;
+  height: 50px;
+  text-decoration: none;
+  padding: 15px;
+  border-bottom: 1px solid rgba(255,255,255,0.5);
+}
+	grid-row-gap:15px;
+	grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+	grid-template-rows: minmax(50px, 100px);
+}
+
+.form-control{
+	border: solid 1px black;
+	display: flex;
+	justify-content: center;
+	align-content: center;
+	column-span: 1;
+	margin: 15px;
+	padding: 15px;
+	min-width: 200px;
+	min-height: 100px;
+}
+/* Fin de agregado por rodrigo */
+
+
+
+
+/* MEDIA QUERYS */
+
+@media(min-width:480px){
+  #banner h2{
+    font-size: 40px;
+  }
+  .banner-button{
+    margin-top: 25px;
+  }
+}
+
 @media (min-width:768px){
   .sociales{
     width: auto;
   }
   footer .contenedor{
     justify-content: space-between;
+  }
+}
+
+@media (min-width:1024px){
+  .contenedor{
+    width: 1100px;
+  }
+  .menu{
+    position: static;
+    width: auto;
+    height: auto;
+    transform: translateX(0%);
+    float: right;
+    display: flex;
+  }
+  .menu ul{
+    display: flex;
+  }
+  header label{
+    display: none;
+  }
+  .menu a{
+    border: none;
+  }
+  .menu a:hover{
+    background: rgba(255,255,255,0.3);
   }
 }
