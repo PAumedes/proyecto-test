@@ -131,8 +131,8 @@ function guardarPerfil($data,$imagen){
 }
 
 function logged(){
-  if (isset($_SESSION['userID'])){return true;}
-  return false;
+  if (isset($_SESSION['userId'])){return true;}
+  else {return false;}
 }
 
  ?>

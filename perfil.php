@@ -14,12 +14,15 @@ $_SESSION['userId']=1;
 
 
 require_once("partials/functions.php");
-require_once("partials/paises.php");
 
 //si no hay sesion activa redirigir a home
 if (!isset($_SESSION["userId"])){
   header("location: index.php");
 }
+
+
+require_once("partials/paises.php");
+
 
 
 //si hay datos de POST validar formulario e imagen.
