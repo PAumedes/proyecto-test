@@ -10,7 +10,7 @@
 <header class="navbar">
   <div class="contenedor">
     <?php if (logged() && isset($user["avatar"])): ?>
-          <img class="logo avatarLogo" src="<?=$user["avatar"]?>">
+          <img class="logo avatarLogo" src="<?=$user['avatar']?>">
     <?php else: ?>
           <img class="logo" src="images/eventrlogo.png">
     <?php endif; ?>
@@ -22,17 +22,17 @@
     <nav class="menu">
       <ul>
         <?php foreach ($navigation as $key => $value): ?>
-            <li><a class="navlink" href="<?=key?>"><?=$value?></a></li>
+            <li><a class="navlink" href="<?=$key?>"><?=$value?></a></li>
         <?php endforeach; ?>
 
         <?php if (logged()): ?>
           <?php foreach ($loggedNavigation as $key => $value): ?>
-              <li><a class="navlink" href="<?=key?>"><?=$value?></a></li>
+              <li><a class="navlink" href="<?=$key?>"><?=$value?></a></li>
           <?php endforeach; ?>
 
         <?php else: ?>
           <?php foreach ($unloggedNavigation as $key => $value): ?>
-              <li><a class="navlink" href="<?=key?>"><?=$value?></a></li>
+              <li><a class="navlink" href="<?=$key?>"><?=$value?></a></li>
           <?php endforeach; ?>
         <?php endif; ?>
       </ul>

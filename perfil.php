@@ -47,10 +47,7 @@ $loggedUser=traerUsuario($_SESSION["userId"]);
 
   <body>
 
-    <header>
-        <?php require_once("partials/navbar.php"); ?>
-    </header>
-
+    <?php require_once("partials/navbar.php"); ?>
 
     <main class="pag-perfil">
 
@@ -58,12 +55,12 @@ $loggedUser=traerUsuario($_SESSION["userId"]);
             <h2>Bienvenido <?=$loggedUser["username"]?></h2>
       </div>
 
-      <div class="row justify-content-center">
+      <div class="">
         <div class="avatar">
           <?php if (isset($loggedUser["avatar"])): ?>
             <img class="" src="<?=$loggedUser['avatar']?>" alt="<?=$loggedUser['username']?>">
           <?php else: ?>
-            <img class="rounded-circle avatar" src="images/avatar-unknown.jpg" alt="sinAvatar">
+            <img class="avatar" src="images/avatar-unknown.jpg" alt="sinAvatar">
           <?php endif; ?>
         </div>
       </div>
@@ -72,9 +69,9 @@ $loggedUser=traerUsuario($_SESSION["userId"]);
       <form class="" action="perfil.php" method="post" enctype="multipart/form-data">
         <div class="form-perfil">
           <!-- Subir avatar -->
-          <div class="form-control">
+          <div class="field-block">
             <label for="avatar">Subir imagen de perfil</label>
-            <input type="file" class="" id="avatar" name="avatar" value="">
+            <input type="file" class="form-field" id="avatar" name="avatar" value="">
             <?php if (isset($erroresPerfil["avatar"])): ?>
               <span class="error-message"><?=$erroresPerfil["avatar"]?></span>
             <?php endif; ?>
@@ -82,16 +79,16 @@ $loggedUser=traerUsuario($_SESSION["userId"]);
 
            <!-- datos personales -->
 
-            <div class="form-control">
-              <input class="" type="text" name="firstName" placeholder="NOMBRE"
+            <div class="feld-block">
+              <input class="form-field" type="text" name="firstName" placeholder="NOMBRE"
               value="<?=isset($loggedUser['firstName']) ? $loggedUser['firstName'] : "" ?>">
               <?php if (isset($erroresPerfil["firstName"])): ?>
                 <span class="error-message"><?=$erroresPerfil["firstName"]?></span>
               <?php endif; ?>
             </div>
 
-            <div class="form-control">
-              <input class="" type="text" name="lastName" placeholder="APELLIDO"
+            <div class="feld-block">
+              <input class="form-field" type="text" name="lastName" placeholder="APELLIDO"
               value="<?=isset($loggedUser['lastName']) ? $loggedUser['lastName'] : "" ?>">
               <?php if (isset($erroresPerfil["lastName"])): ?>
                 <span class="error-message"><?=$erroresPerfil["lastName"]?></span>
@@ -101,23 +98,23 @@ $loggedUser=traerUsuario($_SESSION["userId"]);
 
           <!-- Domicilio -->
 
-            <div class="form-control">
-              <input class="" type="text" name="direccion" placeholder="DIRECCION"
+            <div class="feld-block">
+              <input class="form-field" type="text" name="direccion" placeholder="DIRECCION"
               value="<?=isset($loggedUser['direccion']) ? $loggedUser['direccion'] : "" ?>">
               <?php if (isset($erroresPerfil["direccion"])): ?>
                 <span class="error-message"><?=$erroresPerfil["direccion"]?></span>
               <?php endif; ?>
             </div>
 
-            <div class="form-control">
-              <input class="" type="number" name="codigoPostal" placeholder="CODIGO POSTAL"
+            <div class="feld-block">
+              <input class="form-field" type="number" name="codigoPostal" placeholder="CODIGO POSTAL"
               value="<?=isset($loggedUser['codigoPostal']) ? $loggedUser['codigoPostal'] : "" ?>">
               <?php if (isset($erroresPerfil["codigoPostal"])): ?>
                 <span class="error-message"><?=$erroresPerfil["codigoPostal"]?></span>
               <?php endif; ?>
             </div>
 
-            <div class='form-control'>
+            <div class='feld-block'>
               <label for='pais'>País de nacimiento:</label>
               <select name="pais">
                 <option value="">Elegí</option>
@@ -133,16 +130,16 @@ $loggedUser=traerUsuario($_SESSION["userId"]);
 
 
           <!-- cambio de contraseña -->
-            <div class="form-control">
-                <input class="" type="password" name="password" placeholder="CAMBIAR PASSWORD">
+            <div class="feld-block">
+                <input class="form-field" type="password" name="password" placeholder="CAMBIAR PASSWORD">
               <?php if (isset($erroresPerfil["password"])): ?>
                 <span class="error-message"><?=$erroresPerfil["password"]?></span>
               <?php endif; ?>
             </div>
 
             <!-- repassword -->
-            <div class="form-control">
-              <input class="" type="password" name="repassword" placeholder="CONFIRMAR NUEVO PASSWORD">
+            <div class="feld-block">
+              <input class="form-field" type="password" name="repassword" placeholder="CONFIRMAR NUEVO PASSWORD">
               <?php if (isset($erroresPerfil["repassword"])): ?>
                 <span class="error-message"><?=$erroresPerfil["repassword"]?></span>
               <?php endif; ?>
