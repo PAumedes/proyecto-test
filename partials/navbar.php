@@ -15,9 +15,9 @@
           <img class="logo" src="images/eventrlogo.png">
     <?php endif; ?>
 
-    <label for="menu-bar">
-      <input type="checkbox" id="menu-bar">
-    </label>
+    <label for="menu-bar"></label>
+    <input type="checkbox" id="menu-bar">
+
     <label class="icon-menu" for="menu-bar"></label>
     <nav class="menu">
       <ul>
