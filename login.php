@@ -5,25 +5,37 @@ $title="ingresa"?>
 <!DOCTYPE html>
 <html>
 
-  <?php require_once("partials/head.php") ?>
+  <?php require_once("partials/head.php"); ?>
   <body>
+    <?php require_once("partials/navbar.php"); ?>
 
-    <main>
-      <form class="" action="index.html" method="post">
+    <main class="login-main">
+      <h1>INGRESA</h1>
+      <form class="login-form" action="index.html" method="post">
 
         <div class="form-group">
-          <input class="form-control form-control-lg" type="email" placeholder="TUMAIL@EMAIL.COM">
-          <input class="form-control form-control-lg" type="password" placeholder="PASSWORD">
-        </div>
-          <div class="form-group d-flex flex-wrap align-content-center justify-content-center">
-            <button type="submit"class="col-12 btn btn-primary btn-lg mb-3" name="submt" data-toggle="modal" data-target="#login-modal">INGRESA</button>
-            <input type="checkbox" class="" name="recordar" value=""><span class="text-black">Recordarme |
-              <a class="text-primary" href="#">Olvidaste tu contraseña?</a>
-            </span>
+          <div class="field-block">
+            <label for="user">USUARIO O EMAIL</label>
+            <input id="user" class="form-field " type="text">
           </div>
 
-          <div class="modal-footer">
-              <span>aun no sos parte de EventR? -</span><button type="button" name="register"class="btn btn-link btn-sm" data-dismiss="modal" data-toggle="modal" data-target="#register-modal">Unite!</button>
+          <div class="field-block">
+            <label for="password">PASSWORD</label>
+            <input class="form-field " type="password" >
+          </div>
+        </div>
+
+          <div class="form-footer">
+            <button type="submit" class="submit" name="submt" data-toggle="modal" data-target="#login-modal">Ingresa</button>
+            <div class="recordar">
+              <input type="checkbox" class=" " name="recordar" value="">Recordarme |
+              <a class="" href="#">Olvidaste tu contraseña?</a>
+            </div>
+
+          </div>
+
+          <div class="form-footer">
+              <span>aun no sos parte de EventR? -</span><button type="button" name="register"class="" data-dismiss="modal" data-toggle="modal" data-target="#register-modal">Unite!</button>
           </div>
         </form>
 

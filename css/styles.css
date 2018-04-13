@@ -23,7 +23,7 @@ body {
   top: 0;
   left: 0;
   z-index: 100;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 .contenedor{
   width: 98%;
@@ -33,8 +33,8 @@ body {
   float: left;
 } */
 header .contenedor{
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: repeat(12,1fr);
 }
 section{
   width: 100%;
@@ -96,6 +96,7 @@ section{
   margin-left: 6px 0;
   cursor: pointer;
   align-self: center;
+  grid-column:  -1;
 }
 
 .logo{
@@ -241,9 +242,49 @@ footer .contenedor{
   width: 50px;
   border-radius: 50%;
   margin-left: 5px;
+  grid-column:  1/3;
 }
 
 
+
+/*LOGIN */
+.login-main{
+  margin-top: 50px;
+  display: flex;
+  align-items: center;
+  height: 80vh;
+  justify-content: center;
+  flex-direction: column;
+}
+.login-form{
+  margin: 20px;
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+}
+
+
+.form-field{
+  width: 80%;
+  margin:10px;
+  height: 30px;
+}
+.form-footer{
+  display: flex;
+  flex-direction: column;
+  margin-top: 15px;
+  font-size: 0.8em;
+
+}
+.submit{
+  column-span:2;
+}
+.asd{
+  column-span: 1;
+}
+
+/* /LOGIN   */
 
 /* MEDIA QUERYS */
 
@@ -275,6 +316,7 @@ footer .contenedor{
     height: auto;
     transform: translateX(0%);
     display: flex;
+    grid-column:  -1/-5;
   }
   .menu ul{
     display: flex;
