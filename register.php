@@ -7,31 +7,48 @@ $title="Registrate" ?>
 
   <?php require_once("partials/head.php") ?>
   <body>
-
-    <main>
-      <form class="" action="index.html" method="post">
+    <?php require_once("partials/navbar.php"); ?>
+    <main class="form-main">
+      <h1>Registrate</h1>
+      <form class="login-form" action="index.html" method="post">
 
           <div class="form-group">
-            <input class="form-control form-control-lg" type="text" placeholder="NOMBRE">
-            <input class="form-control form-control-lg" type="text" placeholder="APELLIDO">
-            <input class="form-control form-control-lg" type="email" placeholder="TUMAIL@EMAIL.COM">
-            <input class="form-control form-control-lg" type="password" placeholder="UN PASSWORD PARA TU CUENTA">
+            <div class="field-block">
+              <label for="name">Nombre</label>
+              <input class="form-field" type="text" id="nombre">
+            </div>
+            <div class="field-block">
+                <label for="lastName">Apellido</label>
+                <input class="form-field" type="text">
+            </div>
+            <div class="field-block">
+                <label for="email">Email</label>
+                <input class="form-field" type="email">
+            </div>
+            <div class="field-block">
+              <label for="password">Password</label>
+              <input class="form-field" type="password">
+            </div>
+            <div class="field-block">
+              <label for="rePassword">Confirmar password</label>
+              <input class="form-field" type="password" >
+            </div>
           </div>
-          <div class="form-group d-flex justify-content-center">
-              <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                <label class="btn btn-primary" >
+          <div class="form-group">
+              <div class="" data-toggle="buttons">
+                <label class="" >
                   <input type="radio" name="options" id="dj" autocomplete="off" checked=""> Soy DJ!
                 </label>
-                <label class="btn btn-secondary">
+                <label class="">
                   <input type="radio" name="options" id="organizador" autocomplete="off"> Busco DJ's!
                 </label>
               </div>
+          </div>
+            <div class="form-footer d-column">
+              <button type="submit"class="submit" name="submt">CREA TU CUENTA!</button>
             </div>
-            <div class="form-group d-flex justify-content-center">
-              <button type="submit"class="btn btn-primary btn-lg " name="submt">CREA TU CUENTA!</button>
-            </div>
-            <div class="modal-footer">
-                <span>ya tienes cuenta?  -</span><button type="button" name="login"class="btn btn-link btn-small" data-dismiss="modal" data-toggle="modal" data-target="#login-modal">Ingresa</button>
+            <div class="form-footer">
+                <span>ya tienes cuenta? -</span><a href="login.php">Ingresa</button>
             </div>
         </form>
     </main>

@@ -9,7 +9,7 @@ $title="ingresa"?>
   <body>
     <?php require_once("partials/navbar.php"); ?>
 
-    <main class="login-main">
+    <main class="form-main">
       <h1>INGRESA</h1>
       <form class="login-form" action="index.html" method="post">
 
@@ -25,7 +25,7 @@ $title="ingresa"?>
           </div>
         </div>
 
-          <div class="form-footer">
+          <div class="form-footer d-column">
             <button type="submit" class="submit" name="submt" data-toggle="modal" data-target="#login-modal">Ingresa</button>
             <div class="recordar">
               <input type="checkbox" class=" " name="recordar" value="">Recordarme |
@@ -35,7 +35,7 @@ $title="ingresa"?>
           </div>
 
           <div class="form-footer">
-              <span>aun no sos parte de EventR? -</span><button type="button" name="register"class="" data-dismiss="modal" data-toggle="modal" data-target="#register-modal">Unite!</button>
+              <span>aun no sos parte de EventR? -</span><a href="register.php">Unite!</a>
           </div>
         </form>
 

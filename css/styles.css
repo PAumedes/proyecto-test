@@ -8,11 +8,19 @@
  ol, ul,li{
   list-style: none;
 }
+a{
+  text-decoration: none;
+}
 
 body {
   font-family: 'Montserrat', sans-serif;
 }
 
+/* algunas clases atomicas de utilidad */
+.d-flex{display: flex; flex-wrap: wrap;}
+.d-column{flex-direction: column;}
+
+/* fin clases atomicas */
 
 .navbar {
   width: 100%;
@@ -248,11 +256,13 @@ footer .contenedor{
 
 
 /*LOGIN */
-.login-main{
+
+/* la idea de form main es un main que solo tiene un form seteado al centro de la pagina */
+.form-main{
   margin-top: 50px;
+  padding: 30px;
   display: flex;
   align-items: center;
-  height: 80vh;
   justify-content: center;
   flex-direction: column;
 }
@@ -272,11 +282,10 @@ footer .contenedor{
 }
 .form-footer{
   display: flex;
-  flex-direction: column;
   margin-top: 15px;
   font-size: 0.8em;
-
 }
+
 .submit{
   column-span:2;
 }
