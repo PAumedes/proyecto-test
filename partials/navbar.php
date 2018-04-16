@@ -9,11 +9,14 @@
 
 <header class="navbar">
   <div class="contenedor">
-    <?php if (logged() && isset($user["avatar"])): ?>
-          <img class="logo avatarLogo" src="<?=$user['avatar']?>">
-    <?php else: ?>
-          <img class="logo" src="images/eventrlogo.png">
-    <?php endif; ?>
+
+    <a href="index.php">
+      <?php if (logged() && isset($user["avatar"])): ?>
+            <img class="logo avatarLogo" src="<?=$user['avatar']?>">
+      <?php else: ?>
+            <img class="logo" src="images/eventrlogo.png">
+      <?php endif; ?>
+    </a>
 
     <label for="menu-bar"></label>
     <input type="checkbox" id="menu-bar">
