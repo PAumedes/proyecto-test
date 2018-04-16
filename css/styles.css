@@ -19,6 +19,12 @@ body {
 /* algunas clases atomicas de utilidad */
 .d-flex{display: flex; flex-wrap: wrap;}
 .d-column{flex-direction: column;}
+.justify-content-center{
+  justify-content: center;
+}
+.align-items-center{
+  align-items: center;
+}
 
 /* fin clases atomicas */
 
@@ -241,6 +247,8 @@ footer .contenedor{
   font-style: italic;
   color: #d7011c;
   font-size: 0.8em;
+  width: 80%;
+  display: block;
 }
 
 /* Fin de agregado por rodrigo */
@@ -338,5 +346,9 @@ footer .contenedor{
   }
   .menu a:hover{
     background: rgba(255,255,255,0.3);
+  }
+  .welcome{
+    height: 80vh;
+    width: 80vw;
   }
 }
