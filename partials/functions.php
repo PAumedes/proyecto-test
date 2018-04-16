@@ -222,7 +222,9 @@ function nuevoId(){
   $todos=traerUsuarios();
   if(!$todos){return 1;}
   $ultimo=array_pop($todos);
-  return $ultmo["userId"]+1;
+  $nuevoId = (int)$ultimo["userId"];
+  $nuevoId++;
+  return $nuevoId;
 }
 
  ?>

@@ -1,4 +1,4 @@
-<?php $title="Eventr"
+<?php $title="Eventr";
   if (isset($_SESSION["userId"])){
     header("location: index.php");
   }
