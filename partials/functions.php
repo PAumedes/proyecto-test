@@ -134,6 +134,9 @@ function guardarPerfil($data,$imagen){
   if(isset($data["pais"]) && trim($data["pais"])){
     $user["pais"]=$data["pais"];
   }
+  if(isset($data["password"]) && trim($data["password"]) && (trim($data["password"])==trim($data["repassword"]) ) ){
+    $user["password"]=password_hash($data["password"],PASSWORD_DEFAULT);
+  }
 
   updateUser($user);
   return;
