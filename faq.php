@@ -19,37 +19,34 @@
   <body>
 
 <!-- CONTAINER -->
-    <div class="container d-flex flex-wrap justify-content-center">
+    <main class="">
       <?php require_once("partials/navbar.php"); ?>
 
 <!-- Con el ForEach se recorre el array $FAQ multidimencional que contiene como Key las preguntas y como Value las respuesta. Se incluye la variable Index (inicializada al comienzo del archivo) para usar de contador en las clases e IDs de cada card para el funcionamiento correcto del collaps -->
-<div id="accordion" class="col-xl-6 mb-5">
-    <?php foreach ($faq as $pregunta => $respuesta) : ?>
-    <?php $index++ ?>
-      <div class="card">
-        <div class="card-header d-flex flex-wrap" id="heading<?=$index?>">
-          <h5 class="mb-0">
-            <button class="btn btn-link collapsed faq-btn" data-toggle="collapse" data-target="#collapse<?=$index?>" aria-expanded="false" aria-controls="collapse<?=$index?>">
-              <?=$pregunta?>
-            </button>
-          </h5>
-        </div>
-        <div id="collapse<?=$index?>" class="collapse" aria-labelledby="heading<?=$index?>" data-parent="#accordion">
-          <div class="card-body">
-            <?=$respuesta?>
+    <div id="accordion" class="">
+        <?php foreach ($faq as $pregunta => $respuesta) : ?>
+        <?php $index++ ?>
+          <div class="">
+            <div class="" id="heading<?=$index?>">
+              <h5 class="">
+                <button class="" data-toggle="collapse" data-target="#collapse<?=$index?>" aria-expanded="false" aria-controls="collapse<?=$index?>">
+                  <?=$pregunta?>
+                </button>
+              </h5>
+            </div>
+            <div id="collapse<?=$index?>" class="" aria-labelledby="heading<?=$index?>" data-parent="#accordion">
+              <div class="">
+                <?=$respuesta?>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-    <?php endforeach; ?>
+        <?php endforeach; ?>
 
 
-    <div class="opciones col-12 d-flex justify-content-around mb-5 ">
-      <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#register-modal">Registrate</button>
-      <button type="button" class="btn btn-secondary btn-lg">Conocé más</button>
+
     </div>
-  </div>
 
-  </div>
+  </main>
   <!-- /CONTAINER -->
 
   <?php require_once("partials/footer.php"); ?>
