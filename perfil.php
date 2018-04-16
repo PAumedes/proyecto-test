@@ -7,9 +7,7 @@ if(!isset($_SESSION))
    }
 
 
-// SETEO SESION ACIVA USER ID = 1 PARA TESTEOS
-//borrar al terminar de testear!!
-$_SESSION['userId']=1;
+
 
 
 

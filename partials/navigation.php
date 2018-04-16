@@ -5,7 +5,7 @@
 ];
   $loggedNavigation=[
     "perfil.php"=>"Mi perfil",
-    "logout.php"=>"salir"
+    "partials/logout.php"=>"salir"
   ];
   $unloggedNavigation=[
     "login.php" => "ingresa"

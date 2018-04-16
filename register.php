@@ -60,25 +60,25 @@ if (!isset($erroresRegister["repassword"])){$erroresRegister["repassword"]="";}
 
           <div class="form-group">
             <div class="field-block">
-              <label for="username">Elige un nombre de usuario</label><br>
-              <input class="form-field" name="username" type="text" id="username" value=<?=$user["username"]?> ><br>
+              <label for="username">Elige un nombre de usuario</label>
+              <input class="form-field" name="username" type="text" id="username" value=<?=$user["username"]?> >
               <span class="error-message"><?=$erroresRegister["username"]?></span>
             </div>
 
             <div class="field-block">
-                <label for="email">Un email para tu cuenta</label><br>
-                <input class="form-field" name="email" type="email" value=<?=$user["email"]?> ><br>
+                <label for="email">Un email para tu cuenta</label>
+                <input class="form-field" name="email" type="email" value=<?=$user["email"]?> >
                 <span class="error-message"><?=$erroresRegister["email"]?></span>
             </div>
 
             <div class="field-block">
-              <label for="password">Password</label><br>
-              <input class="form-field" name="password" type="password"><br>
+              <label for="password">Password</label>
+              <input class="form-field" name="password" type="password">
               <span class="error-message"> <?=$erroresRegister["password"] ?> </span>
             </div>
             <div class="field-block">
-              <label for="repassword">Confirmar password</label><br>
-              <input class="form-field" name="repassword" type="password" ><br>
+              <label for="repassword">Confirmar password</label>
+              <input class="form-field" name="repassword" type="password" >
               <span class="error-message"><?=$erroresRegister["repassword"]?></span>
             </div>
 

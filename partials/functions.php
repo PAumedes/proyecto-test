@@ -1,13 +1,13 @@
 <?php
 
-if(!isset($_SESSION))
-   {
-       session_start();
-   }
 
-if (isset($_COOKIE["userId"])){
-  $_SESSION["userId"]=$_COOKIE["userId"];
-}
+ session_start();
+
+
+// var_dump($_COOKIE);exit;
+// if (isset($_COOKIE["userId"]) && trim($_COOKIE["userId"])){
+//   $_SESSION["userId"]=$_COOKIE["userId"];
+// }
 
 
 //Devuelve la lista completa de usuarios
@@ -48,7 +48,7 @@ function validarLogin($data){
         }
       }
     }
-    $errores["email"]="El email no esta registrado";
+    $errores["user"]="El usuario o email no esta registrado";
     return $errores;
   }
 }

@@ -297,8 +297,9 @@ footer .contenedor{
 .submit{
   column-span:2;
 }
-.asd{
-  column-span: 1;
+.field-block{
+  display: flex;
+  flex-direction: column;
 }
 
 /* /LOGIN   */
