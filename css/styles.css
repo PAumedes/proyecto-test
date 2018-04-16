@@ -26,6 +26,7 @@ body {
   align-items: center;
 }
 
+
 /* fin clases atomicas */
 
 .navbar {
@@ -39,6 +40,8 @@ body {
   z-index: 100;
   /* overflow: hidden; */
 }
+
+
 .contenedor{
   width: 98%;
   margin:auto;
@@ -261,13 +264,14 @@ footer .contenedor{
   grid-column:  1/3;
 }
 
-
+/* Aplico margin top a todos los main para que queden por abajo del navbar que esta en position fixed  */
+main{margin-top: 50px;}
 
 /*LOGIN Y REGISTER*/
 
 /* la idea de form main es un main que solo tiene un form seteado al centro de la pagina */
 .form-main{
-  margin-top: 50px;
+
   padding: 30px;
   display: flex;
   align-items: center;
@@ -303,6 +307,12 @@ footer .contenedor{
 }
 
 /* /LOGIN   */
+
+/* FAQ */
+.faq{
+  padding: 20px;
+}
+
 
 /* MEDIA QUERYS */
 

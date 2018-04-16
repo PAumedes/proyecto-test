@@ -23,27 +23,11 @@
       <?php require_once("partials/navbar.php"); ?>
 
 <!-- Con el ForEach se recorre el array $FAQ multidimencional que contiene como Key las preguntas y como Value las respuesta. Se incluye la variable Index (inicializada al comienzo del archivo) para usar de contador en las clases e IDs de cada card para el funcionamiento correcto del collaps -->
-    <div id="accordion" class="">
+    <div  class="faq">
         <?php foreach ($faq as $pregunta => $respuesta) : ?>
-        <?php $index++ ?>
-          <div class="">
-            <div class="" id="heading<?=$index?>">
-              <h5 class="">
-                <button class="" data-toggle="collapse" data-target="#collapse<?=$index?>" aria-expanded="false" aria-controls="collapse<?=$index?>">
-                  <?=$pregunta?>
-                </button>
-              </h5>
-            </div>
-            <div id="collapse<?=$index?>" class="" aria-labelledby="heading<?=$index?>" data-parent="#accordion">
-              <div class="">
-                <?=$respuesta?>
-              </div>
-            </div>
-          </div>
+            <span> <b><?=$pregunta?></b> </span> <br>
+            <p><?=$respuesta?></p> <br><br>
         <?php endforeach; ?>
-
-
-
     </div>
 
   </main>
