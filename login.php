@@ -3,6 +3,11 @@ $title="ingresa";
 
 require_once("partials/functions.php");
 
+if(isset($_SESSION["userId"])){
+  header("location:index.php");
+  exit;
+}
+
 $user["user"]="";
 if ($_POST){
   $user["user"]=trim($_POST["user"]);

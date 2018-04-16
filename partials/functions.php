@@ -1,8 +1,9 @@
 <?php
 
-
- session_start();
-
+if(!isset($_SESSION))
+   {
+       session_start();
+   }
 
 // var_dump($_COOKIE);exit;
 // if (isset($_COOKIE["userId"]) && trim($_COOKIE["userId"])){

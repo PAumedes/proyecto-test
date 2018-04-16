@@ -9,8 +9,6 @@ if(!isset($_SESSION))
 
 
 
-
-
 require_once("partials/functions.php");
 
 //si no hay sesion activa redirigir a home
