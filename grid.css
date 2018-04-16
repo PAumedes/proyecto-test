@@ -1,0 +1,30 @@
+.wrapper{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+header{
+    background-color: blue;
+    height: 100px;
+
+}
+
+nav{
+    background-color: red;
+    height: 100px;
+}
+
+aside{
+    background-color: yellow;
+    height: 100px;
+}
+
+main{
+    background-color: green;
+    height: 100px;
+}
+
+footer{
+    background-color: orange;
+    height: 100px;
+}
