@@ -15,6 +15,8 @@ a{
 body {
   font-family: 'Montserrat', sans-serif;
 }
+img{width: 100%;}
+
 
 /* algunas clases atomicas de utilidad */
 .d-flex{display: flex; flex-wrap: wrap;}
@@ -245,14 +247,26 @@ footer .contenedor{
 }
 
 /*Agregador por Rodrigo para PERFIL.PHP..*/
+.perfil-main{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 
-.error-message{
-  font-style: italic;
-  color: #d7011c;
-  font-size: 0.8em;
-  width: 80%;
-  display: block;
 }
+.avatar{
+  display: flex;
+  align-items: center;
+  width: 250px;
+  height: 250px;
+  justify-content: center;
+  border-radius: 50%;
+  box-shadow: 3px -3px  rgba(0,0,0,0.6);
+  overflow: hidden;
+}
+ .avatar-img{
+   width: 150%;
+ }
 
 /* Fin de agregado por rodrigo */
 
@@ -270,6 +284,15 @@ main{margin-top: 50px;}
 /*LOGIN Y REGISTER*/
 
 /* la idea de form main es un main que solo tiene un form seteado al centro de la pagina */
+.error-message{
+  font-style: italic;
+  color: #d7011c;
+  font-size: 0.8em;
+  width: 80%;
+  display: block;
+}
+
+
 .form-main{
 
   padding: 30px;

@@ -45,7 +45,7 @@ $loggedUser=traerUsuario($_SESSION["userId"]);
 
     <?php require_once("partials/navbar.php"); ?>
 
-    <main class="pag-perfil">
+    <main class="perfil-main">
 
       <div class="">
             <h2>Bienvenido <?=$loggedUser["username"]?></h2>
@@ -54,9 +54,9 @@ $loggedUser=traerUsuario($_SESSION["userId"]);
       <div class="">
         <div class="avatar">
           <?php if (isset($loggedUser["avatar"])): ?>
-            <img class="" src="<?=$loggedUser['avatar']?>" alt="<?=$loggedUser['username']?>">
+            <img class="avatar-img" src="<?=$loggedUser['avatar']?>" alt="<?=$loggedUser['username']?>">
           <?php else: ?>
-            <img class="avatar" src="images/avatar-unknown.jpg" alt="sinAvatar">
+            <img class="avatar-img" src="images/avatar-unknown.jpg" alt="sinAvatar">
           <?php endif; ?>
         </div>
       </div>
