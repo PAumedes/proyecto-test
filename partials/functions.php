@@ -5,10 +5,10 @@ if(!isset($_SESSION))
        session_start();
    }
 
-// var_dump($_COOKIE);exit;
-// if (isset($_COOKIE["userId"]) && trim($_COOKIE["userId"])){
-//   $_SESSION["userId"]=$_COOKIE["userId"];
-// }
+
+ if (isset($_COOKIE["userId"]) && trim($_COOKIE["userId"])){
+   $_SESSION["userId"]=$_COOKIE["userId"];
+ }
 
 
 //Devuelve la lista completa de usuarios
@@ -27,6 +27,7 @@ function traerUsuarios(){
 
 //recibe la informacion de POST del form login.
 //valida los campos, devuelve los posibles errores en un array.
+//si no hay errores seta la COOKIE y el userId en SESSION
 function validarLogin($data){
   $errores=[];
 
