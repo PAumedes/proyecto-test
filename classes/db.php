@@ -22,6 +22,7 @@
 
         public static function createDB()
         {
+
             //$db=$this->connect();
             $dsn = 'mysql:host=localhost; charset=utf8';
             try
@@ -29,7 +30,6 @@
                 $db = new PDO($dsn, self::$db_user, self::$db_pass, self::$opt);
                 $sql = "CREATE DATABASE IF NOT EXISTS eventr_db";
                 $db->exec($sql);
-
             }
             catch( PDOException $Exception )
             {
@@ -84,6 +84,8 @@
 
             $db = self::connect();
 
+            $db = self::connect();
+
             try
             {
                 $use = "use eventr_db";
@@ -95,8 +97,6 @@
             {
                 echo $Exception->getMessage();
             }
-
-
          }
 
         public static function migrateJSON()
@@ -110,6 +110,7 @@
         }
 
     }
+
 
 
     db::createDB();
