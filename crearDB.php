@@ -1,45 +1,44 @@
 /*formulario al cual redirijo si no esta creada la DB*/
 <?php
+$title = "crear DB";
 
-/*if(isset($_POST['db'])){
-  creo la db con db::createdb,
-  si l try catch de esto me devuelve error o false, genero un error en pantalla
-  $error['db'] = No se pudo crear la db intente denuevo.
-}*/
+require_once('classes/Db.php');
+require_once('classes/Users.php');
 
+
+$message="";
 
 if(isset($_POST['db'])){
-  db::createDB
-} else {
-  $error['db'] = "No se pudo crear la db, intente de nuevo"
+  Db::createDB();
+  $message = "DB creada";
 }
 
 
-/*if(isset($_POST['table']){
-  if(!db::connect){
-    $error['db'] = che antes de las tablas, crea la db
-  }else{
-    db::createTable
-    $error['db'] = Tablas creadas!
-  }
-
-})*/
-
-
-if(isset($_POST['table'])){
-  if(!db:connect){
-    $error['db'] = "Primero crea la db"
+if(isset($_POST['table']))
+{
+  if(!Db::existsDB()){
+    $message = "Primero crea la db";
   } else{
-    db::createTable
-    $error['db'] = "Tablas creadas"
+    Db::createTable();
+    $message = "Tablas creadas";
   }
 }
 
 
 
-/*if(isset($_POST['migrar']){
+if(isset($_POST['migrate']) )
+{
+  if(!Db::existsDB())
+  {
+    $message = 'Primero se debe crear la DB';
+  }elseif (!Db::existsTable('users')) {
+    $message = 'Primero se debe crear la tabla de usuarios';
+  }else{
 
-})*/
+    if ($error = !Users::migrateJSON()){$message="JSON migrado";}
+    else{$message = $error;}
+  }
+}
 
 
 
@@ -55,10 +54,11 @@ if(isset($_POST['table'])){
     <title></title>
   </head>
   <body>
+    <h2><?=$message?></h2>
     <form class="" action="" method="post">
       <button type="submit" name="db">crear db</button>
       <button type="submit" name="table"> crear tablas</button>
-      <button type="submit" name="table"> migrar json a db</button>
+      <button type="submit" name="migrate"> migrar json a db</button>
     </form>
   </body>
 </html>

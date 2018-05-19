@@ -11,10 +11,25 @@
         private $address;
         private $cp;
         private $avatar;
+        private $userType;
         // private $userType;
         // private $country;
 
         // GETTERS & SETTERS
+
+        public function __construct()
+        {
+          $this->id = 0;
+          $this->username ='';
+          $this->password = '';
+          $this->email = '';
+          $this->firstName = '';
+          $this->lastName = '';
+          $this->address = '';
+          $this->cp = '';
+          $this->avatar = '';
+          $this->userType = '';
+        }
 
         public function getID()
         {
@@ -56,15 +71,15 @@
             $this->email = $newEmail;
         }
 
-        // public function getUserType()
-        // {
-        //     return $this->userType;
-        // }
+         public function getUserType()
+         {
+             return $this->userType;
+         }
 
-        // public function setUsertype($newUserType)
-        // {
-        //     $this->userType = $newUserType;
-        // }
+         public function setUsertype($newUserType)
+         {
+             $this->userType = $newUserType;
+         }
 
         public function getFirstName()
         {
@@ -110,7 +125,7 @@
         // {
         //     return $this->country;
         // }
-
+        //
         // public function setCountry($newCountry)
         // {
         //     $this->country = $newCountry;
@@ -126,9 +141,22 @@
             $this->avatar = $newAvatar;
         }
 
+        public function loadFromArray(array $array)
+        {
+          $this->username = $array["username"];
+          $this->password = $array["password"];
+          $this->email = $array["email"];
+          $this->userType = $array["userType"];
+          if (isset($array["firstname"])){$this->firstname = $array["firstname"];}
+          if (isset($array["lastname"])){$this->lastname = $array["lastname"];}
+          if (isset($array["address"])){$this->address = $array["address"];}
+          if (isset($array["cp"])){$this->cp = $array["cp"];}
+          if (isset($array["avatar"])){$this->avatar = $array["avatar"];}
+        }
+
         public function update()
         {
-        
+
         }
     }
 

@@ -1,8 +1,8 @@
 <head>
   <?php
     /*Si db::connect da false, redirijo al formulario para crear la db(crearDB.php)*/
-    if(!db:connect){
-      header('location: crearDB.php')
+    if(!Db::existsDB() || !Db::existsTable('users')){
+      header('location: crearDB.php');
     }
   ?>
   <meta charset="utf-8">

@@ -1,6 +1,6 @@
 <?php
 
-    abstract class validator 
+    abstract class Validator
     {
         public static function validateRegister($data)
         {
@@ -14,7 +14,7 @@
 
         public static function validateProfile($data)
         {
-            
+
         }
 
     }

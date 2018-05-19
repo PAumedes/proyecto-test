@@ -1,6 +1,8 @@
 <?php
+require_once("partials/functions.php");
+require_once('classes/Db.php');
+if (!Db::existsDB()){header('location: crearDB.php');}
 $title = "Eventr";
-require_once("partials/functions.php")
  ?>
 
  <!DOCTYPE html>

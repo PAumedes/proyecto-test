@@ -1,6 +1,6 @@
 <?php
 
-    abstract class auth
+    abstract class Auth
     {
         // PASA EL PARAMETRO RECORDAR. SINO SE PASA EL DEFAULT ES IGUAL A CERO
         public static function login($remember = 0)
