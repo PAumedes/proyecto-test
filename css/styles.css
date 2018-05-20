@@ -336,6 +336,18 @@ main{margin-top: 50px;}
   padding: 20px;
 }
 
+.answer{
+  display: none;
+  font-size: 1.2em;
+}
+.question{
+  background: none;
+  font-size: 1.5em;
+  font-weight: normal;
+  border: none;
+  color: #89bdd3;
+ }
+
 
 /* MEDIA QUERYS */
 

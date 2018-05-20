@@ -1,7 +1,7 @@
 <?php
   require_once("navigation.php");
   require_once('classes/Auth.php');
-  // require_once("functions.php");
+
 $user = Auth::loggedUser();
 ?>
 

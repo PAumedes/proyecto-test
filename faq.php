@@ -25,8 +25,9 @@
 <!-- Con el ForEach se recorre el array $FAQ multidimencional que contiene como Key las preguntas y como Value las respuesta. Se incluye la variable Index (inicializada al comienzo del archivo) para usar de contador en las clases e IDs de cada card para el funcionamiento correcto del collaps -->
     <div  class="faq">
         <?php foreach ($faq as $pregunta => $respuesta) : ?>
-            <span> <b><?=$pregunta?></b> </span> <br>
-            <p><?=$respuesta?></p> <br><br>
+          <?php $index++ ?>
+          <button class="question" onclick="toggleAnswer(<?=$index?>)"><b><?=$pregunta?></b></button>   <br>
+            <p class="answer" id="<?=$index?>" ><?=$respuesta?></p> <br><br>
         <?php endforeach; ?>
     </div>
 
