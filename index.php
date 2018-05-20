@@ -1,8 +1,9 @@
 <?php
-require_once("partials/functions.php");
 require_once('classes/Db.php');
-if (!Db::existsDB()){header('location: crearDB.php');}
+require_once('classes/Auth.php');
 $title = "Eventr";
+Auth::session_start();
+$user = Auth::loggedUser();
  ?>
 
  <!DOCTYPE html>
@@ -17,7 +18,7 @@ $title = "Eventr";
        <section id="banner" class="banner">
            <h2>Eventr</h2>
            <p>Es una plataforma que permite tanto a DJ's como a organizadores de eventos encontrarse para generar shows increíbles. Los DJ tendrán la posibilidad de crearse un perfil con todos sus datos, incluyendo las redes sociales con sus sets, fotos y experiencias. Así mismo tendrán un calendario donde podrán poner su disponibilidad para tocar. Los organizadores de eventos, nuestros principales clientes, tendrán la posibilidad de buscar DJ's por nombre, género o disponibilidad de fecha.</p>
-           <?php if(!logged()):?><a href="register.php" class="banner-button resaltado">Registrate</a><?php endif?>
+           <?php if(!$user):?><a href="register.php" class="banner-button resaltado">Registrate</a><?php endif?>
            <a href="#" class="banner-button">Conocé más</a>
        </section>
 

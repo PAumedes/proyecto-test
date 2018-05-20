@@ -1,4 +1,5 @@
 <?php
+require_once('Db.php');
 
     class User {
 
@@ -6,10 +7,10 @@
         private $username;
         private $password;
         private $email;
-        private $firstName;
-        private $lastName;
+        private $first_name;
+        private $last_name;
         private $address;
-        private $cp;
+        private $CP;
         private $avatar;
         private $userType;
         // private $userType;
@@ -23,10 +24,10 @@
           $this->username ='';
           $this->password = '';
           $this->email = '';
-          $this->firstName = '';
-          $this->lastName = '';
+          $this->first_name = '';
+          $this->last_name = '';
           $this->address = '';
-          $this->cp = '';
+          $this->CP = '';
           $this->avatar = '';
           $this->userType = '';
         }
@@ -81,29 +82,29 @@
              $this->userType = $newUserType;
          }
 
-        public function getFirstName()
+        public function getFirst_name()
         {
-            return $this->firstName;
+            return $this->first_name;
         }
 
-        public function setFirstName($newFirstName)
+        public function setFirst_name($newFirst_name)
         {
-            $this->firstName = $newFirstName;
+            $this->first_name = $newFirst_name;
         }
 
-        public function getLastName()
+        public function getLast_name()
         {
-            return $this->lastName;
+            return $this->last_name;
         }
 
-        public function setLastName($newLastName)
+        public function setLast_name($newLast_name)
         {
-            $this->lastName = $newLastName;
+            $this->last_name = $newLast_name;
         }
 
         public function getAddress()
         {
-            return $this->lastName;
+            return $this->address;
         }
 
         public function setAddress($newAddress)
@@ -113,12 +114,12 @@
 
         public function getCP()
         {
-            return $this->cp;
+            return $this->CP;
         }
 
         public function setCP($newCP)
         {
-            $this->cp = $newCP;
+            $this->CP = $newCP;
         }
 
         // public function getCountry()
@@ -147,18 +148,103 @@
           $this->username = $array["username"];
           $this->password = $array["password"];
           $this->email = $array["email"];
+          if (isset($array['id'])){$this->id = $array['id'];}
           if (isset($array["userType"])){$this->userType = $array["userType"];}
-          if (isset($array["firstname"])){$this->firstname = $array["firstname"];}
-          if (isset($array["lastname"])){$this->lastname = $array["lastname"];}
+          if (isset($array["first_name"])){$this->first_name = $array["first_name"];}
+          if (isset($array["last_name"])){$this->last_name = $array["last_name"];}
           if (isset($array["address"])){$this->address = $array["address"];}
-          if (isset($array["cp"])){$this->cp = $array["cp"];}
+          if (isset($array["CP"])){$this->CP = $array["CP"];}
           if (isset($array["avatar"])){$this->avatar = $array["avatar"];}
         }
 
-        public function update()
+        //actualiza un campo en la base de datos con el valor actual del campo.
+        public function updateUserField(string $field)
         {
+          $db = Db::connect();
+          $queryText = "UPDATE users
+                        SET {$field} = :value
+                        WHERE id = :id ";
+          try {
+            $query = $db->prepare($queryText);
+            $query->bindValue(':value',$this->$field,PDO::PARAM_STR);
+            $query->bindValue(':id',$this->id,PDO::PARAM_INT);
+            $query->execute();
+          } catch (\Exception $e) {
+            echo $e->getMessage();exit;
+          }
 
         }
-    }
+        //actualiza un campo en la base de datos con el valor actual del campo.
+        public function updateProfileField(string $field)
+        {
+          $db = Db::connect();
+          $queryText = "UPDATE profiles
+                        SET {$field} = :value
+                        WHERE user_id = :id ";
+          try {
+            $query = $db->prepare($queryText);
+            $query->bindValue(':value',$this->$field,PDO::PARAM_STR);
+            $query->bindValue(':id',$this->id,PDO::PARAM_INT);
+            $query->execute();
+          } catch (\Exception $e) {
+            echo $e->getMessage();exit;
+          }
+
+        }
+        // Modifica los datos del usuario con lo que trae post y file, si esta seteado
+        // hace un update en la base de datos.
+        public function update($data,$image)
+        {
+          $userUpdates=[];
+          $profileUpdates=[];
+            if ( isset($_FILES[$image]) && trim($_FILES[$image]["name"] ) )
+            {
+                $extension = pathinfo($_FILES[$image]["name"],PATHINFO_EXTENSION);
+                $path= dirname(__file__ , 2) . "/images/" . $user["username"] . "." . $extension;
+                move_uploaded_file($_FILES[$image]["tmp_name"], $path);
+                $this->setAvatar(strstr($path,"images"));
+                $userUpdates[]='avatar';
+            }
+            if(isset($data["password"]) && trim($data["password"]) && (trim($data["password"])==trim($data["repassword"]) ) ){
+              $this->setPassword(password_hash($data["password"],PASSWORD_DEFAULT));
+              $userUpdates[]='password';
+            }
+
+            if(isset($data["first_name"]) && trim($data["first_name"])){
+              $this->setFirst_name($data["first_name"]);
+              $profileUpdates[] = 'first_name';
+            }
+
+            if(isset($data["last_name"]) && trim($data["last_name"])){
+              $this->setLast_name($data["last_name"]);
+              $profileUpdates[] = 'last_name';
+            }
+            if(isset($data["address"]) && trim($data["address"])){
+              $this->setAddress($data["address"]);
+              $profileUpdates[] = 'address';
+            }
+            if(isset($data["CP"]) && trim($data["CP"])){
+              $this->setCP($data["CP"]);
+              $profileUpdates[]='CP';
+            }
+
+            if ($userUpdates)
+            {
+                foreach ($userUpdates as $update) {
+                  $this->updateUserField($update);
+                }
+            }
+            if ($profileUpdates)
+            {
+              foreach ($profileUpdates as $update)
+              {
+                $this->updateProfileField($update);
+              }
+
+            }
+
+        }
+
+}
 
 ?>

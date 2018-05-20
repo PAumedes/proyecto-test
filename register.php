@@ -1,35 +1,28 @@
 <?php
-$title="Registrate";
-require_once("partials/functions.php");
+require_once("classes/Auth.php");
+require_once("classes/Validator.php");
+require_once("classes/Users.php");
+require_once("classes/User.php");
 
-if(isset($_SESSION["userId"])){
-  header("location: index.php");
-}
+$title="Registrate";
+if (Auth::loggedUser()){header('location: index.php');}
+
 
 //inicializacion de variables
-$options = ["dj"=>"Soy DJ!","eventr"=>"Busco Dj's para eventos!"];
+$options = ["DJ"=>"Soy DJ!","eventr"=>"Busco Dj's para eventos!"];
 
-$user["username"]="";
-$user["email"]="";
-$user["password"]="";
-$user["repassword"]="";
-$user["option"]="eventr";
-
-
-
+$user = new User();
 
 if($_POST){
-  $user["username"] = trim($_POST["username"]);
-  $user["email"] = trim($_POST["email"]);
-  $user["password"] = trim($_POST["password"]);
-  $user["repassword"] = trim($_POST["repassword"]);
-  $user["option"] = $_POST["option"];
 
+  $user->setUsername(trim($_POST["username"]));
+  $user->setEmail(trim($_POST["email"]));
+  $user->setPassword(trim($_POST["password"]));
+  $user->setUsertype(trim($_POST["option"]));
 
-
-  $erroresRegister = validarRegistro($user);
+  $erroresRegister = Validator::validateRegister($user,$_POST["repassword"]);
   if (!$erroresRegister){
-    registrar($user);
+    Users::create($user);
     header("location: welcome.php");
     exit;
   }
@@ -61,13 +54,13 @@ if (!isset($erroresRegister["repassword"])){$erroresRegister["repassword"]="";}
           <div class="form-group">
             <div class="field-block">
               <label for="username">Elige un nombre de usuario</label>
-              <input class="form-field" name="username" type="text" id="username" value=<?=$user["username"]?> >
+              <input class="form-field" name="username" type="text" id="username" value=<?=$user->getUsername()?> >
               <span class="error-message"><?=$erroresRegister["username"]?></span>
             </div>
 
             <div class="field-block">
                 <label for="email">Un email para tu cuenta</label>
-                <input class="form-field" name="email" type="email" value=<?=$user["email"]?> >
+                <input class="form-field" name="email" type="email" value=<?=$user->getEmail()?> >
                 <span class="error-message"><?=$erroresRegister["email"]?></span>
             </div>
 
@@ -88,7 +81,7 @@ if (!isset($erroresRegister["repassword"])){$erroresRegister["repassword"]="";}
               <div class="" data-toggle="buttons">
                 <?php foreach ($options as $key => $value): ?>
                   <label class="" >
-                    <?php if ($key == $user["option"]): ?>
+                    <?php if ($key == $user->getUserType()): ?>
                       <input type="radio" name="option" value="<?=$key?>"  autocomplete="off" checked="" > <?=$value?>
                     <?php else: ?>
                       <input type="radio" name="option" value="<?=$key?>"  autocomplete="off" > <?=$value?>

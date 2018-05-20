@@ -41,6 +41,9 @@
         // toma un objeto de tipo usuario y lo guarda en la base de datos.
         public static function create(User $user)
         {
+          //hasheo las password antes de guardar en la DB
+          $user->setPassword(password_hash($user->getPassword(),PASSWORD_DEFAULT));
+
           $db = Db::connect();
           $queryText = "INSERT INTO users(username,password,email,avatar,user_type)
                         VALUES (:username,:password,:email, :avatar, :userType) ";
@@ -60,7 +63,7 @@
                           VALUES (:user_id,:first_name,:last_name,:CP,:address)';
             $query = $db->prepare($queryText);
             $query->bindValue(':user_id',$userID,PDO::PARAM_INT);
-            $query->bindValue(':first_name',$user->getFirstName(),PDO::PARAM_STR);
+            $query->bindValue(':first_name',$user->getFirst_name(),PDO::PARAM_STR);
             $query->bindValue(':last_name',$user->getLastName(),PDO::PARAM_STR);
             $query->bindValue(':CP',$user->getCP(),PDO::PARAM_STR);
 
@@ -113,7 +116,33 @@
 
         }
 
+        public static function getById(int $id)
+        {
+          $db = Db::connect();
+          $queryText = "SELECT u.id,u.username,u.email,u.password,u.user_type, u.avatar,
+                               p.first_name,p.last_name,p.CP,p.phone,p.address
+                        FROM users as u
+                        INNER JOIN profiles  as p on u.id = p.user_id
+                        WHERE u.id = :value";
+          try
+          {
+            $query = $db->prepare($queryText);
+            //$field = 'u.'.$field;
+            $query->bindValue(':value',$id,PDO::PARAM_STR);
+            $query->execute();
+          } catch (PDOException $e) {
+            echo $e->getMessage();exit;
+          }
 
+          $result = $query->fetch(PDO::FETCH_ASSOC);
+          if ($result)
+          {
+              $user = new User;
+              $user->loadFromArray($result);
+              return $user;
+          }
+          else {return false;}
+        }
 
         // recive un campo de referencia de busqueda y un valor.
         // devuelve un objeto usuario

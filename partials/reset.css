@@ -1,0 +1,61 @@
+
+:root
+{
+--fucsia :  #ff2080;
+--turquesa:#06ACCC;
+--amarillo: #FFEB3A;
+--dark-fucsia:#b2054f;
+--dark-turquesa:#09879f;
+}
+
+/* CLASES AUXILIARES */
+.d-flex{display: flex; flex-wrap: wrap;justify-content: center;align-items: center;}
+.space-between{justify-content: space-between;}
+.space-around{justify-content: space-around;}
+.hidden { display: none; }
+.bg-fucsia{ background-color: var(--fucsia); }
+.fucsia{color:var(--fucsia);}
+
+/* RESET */
+*{box-sizing: border-box;}
+img{width: 100%;}
+a{text-decoration: none; }
+body
+{
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px;
+}
+
+main
+{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+button{
+  background: none;
+  border: none;#
+}
+
+body,li,ul,ol
+{
+  padding: 0;
+  margin: 0;
+}
+
+ul,ol,li{list-style: none;}
+
+/*  /RESET */
+
+@media (max-width:838px)
+{
+  .hide-on-wide{display: ''}
+  .show-on-wide{display: none;}
+}
+@media (min-width:838px)
+{
+  .hide-on-wide  { display: none; }
+  .show-on-wide  {display: '';}
+}

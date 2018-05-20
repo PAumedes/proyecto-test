@@ -1,8 +1,7 @@
-<?php $title="Eventr";
-  if (isset($_SESSION["userId"])){
-    header("location: index.php");
-  }
-
+<?php
+require_once('classes/Auth.php');
+ $title="Eventr";
+ Auth::session_start();
 ?>
 <!DOCTYPE html>
 <html>
@@ -15,7 +14,7 @@
     </main>
     <div class="welcome d-flex d-column justify-content-center align-items-center">
       <h1>BIENVENIDO</h1>
-      <h2>Ya creaste tu cuente de <b>EventR</b> </h2>
+      <h2>Ya creaste tu cuenta de <b>EventR</b> </h2>
       <h2>ahora  <a href="login.php">ingresa</a> </h2>
     </div>
     <?php require_once("partials/footer.php"); ?>

@@ -1,39 +1,33 @@
 <?php
+require_once("classes/Auth.php");
+require_once("classes/Validator.php");
+require_once("classes/User.php");
+
 $title="mi perfil";
 
-if(!isset($_SESSION))
-   {
-       session_start();
-   }
+$user = Auth::loggedUser();
 
 
 
-
-require_once("partials/functions.php");
 
 //si no hay sesion activa redirigir a home
-if (!isset($_SESSION["userId"])){
-  header("location: index.php");
-}
+if (!$user){ header("location: index.php"); }
 
-
-require_once("partials/paises.php");
 
 
 
 //si hay datos de POST validar formulario e imagen.
 $erroresPerfil=[];
-if ($_POST){
-
-    $erroresPerfil = validarPerfil($_POST,"avatar");
-
-    if(!$erroresPerfil){
-    guardarPerfil($_POST,"avatar");
+if ($_POST || isset($_FILES["avatar"]))
+{
+    $erroresPerfil = Validator::validateProfile($_POST,'avatar');
+    if(!$erroresPerfil)
+    {
+      $user->update($_POST,"avatar");
     }
 }
 
 
-$loggedUser=traerUsuario($_SESSION["userId"]);
 
  ?>
 
@@ -48,13 +42,13 @@ $loggedUser=traerUsuario($_SESSION["userId"]);
     <main class="perfil-main">
 
       <div class="">
-            <h2>Bienvenido <?=$loggedUser["username"]?></h2>
+            <h2>Bienvenido <?=$user->getUsername()?></h2>
       </div>
 
       <div class="">
         <div class="avatar">
-          <?php if (isset($loggedUser["avatar"])): ?>
-            <img class="avatar-img" src="<?=$loggedUser['avatar']?>" alt="<?=$loggedUser['username']?>">
+          <?php if ($user->getAvatar()): ?>
+            <img class="avatar-img" src="<?=$user->getAvatar()?>" alt="<?=$user->getUsername?>">
           <?php else: ?>
             <img class="avatar-img" src="images/avatar-unknown.jpg" alt="sinAvatar">
           <?php endif; ?>
@@ -76,58 +70,50 @@ $loggedUser=traerUsuario($_SESSION["userId"]);
            <!-- datos personales -->
 
             <div class="feld-block">
-              <input class="form-field" type="text" name="firstName" placeholder="NOMBRE"
-              value="<?=isset($loggedUser['firstName']) ? $loggedUser['firstName'] : "" ?>">
-              <?php if (isset($erroresPerfil["firstName"])): ?>
-                <span class="error-message"><?=$erroresPerfil["firstName"]?></span>
+              <label for="">NOMBRE</label>
+              <input class="form-field" type="text" name="first_name"
+              value="<?= $user->getfirst_name()?>">
+              <?php if (isset($erroresPerfil["first_name"])): ?>
+                <span class="error-message"><?=$erroresPerfil["first_name"]?></span>
               <?php endif; ?>
             </div>
 
             <div class="feld-block">
-              <input class="form-field" type="text" name="lastName" placeholder="APELLIDO"
-              value="<?=isset($loggedUser['lastName']) ? $loggedUser['lastName'] : "" ?>">
-              <?php if (isset($erroresPerfil["lastName"])): ?>
-                <span class="error-message"><?=$erroresPerfil["lastName"]?></span>
+              <label for="">APELLIDO</label>
+              <input class="form-field" type="text" name="last_name"
+              value="<?=$user->getLast_name()?>">
+              <?php if (isset($erroresPerfil["last_name"])): ?>
+                <span class="error-message"><?=$erroresPerfil["last_name"]?></span>
               <?php endif; ?>
             </div>
 
 
           <!-- Domicilio -->
 
-            <div class="feld-block">
-              <input class="form-field" type="text" name="direccion" placeholder="DIRECCION"
-              value="<?=isset($loggedUser['direccion']) ? $loggedUser['direccion'] : "" ?>">
-              <?php if (isset($erroresPerfil["direccion"])): ?>
-                <span class="error-message"><?=$erroresPerfil["direccion"]?></span>
+            <div class="field-block">
+              <label for="">DIRECCION</label>
+              <input class="form-field" type="text" name="address"
+              value="<?= $user->getAddress() ?>">
+              <?php if (isset($erroresPerfil["address"])): ?>
+                <span class="error-message"><?=$erroresPerfil["address"]?></span>
               <?php endif; ?>
             </div>
 
-            <div class="feld-block">
-              <input class="form-field" type="number" name="codigoPostal" placeholder="CODIGO POSTAL"
-              value="<?=isset($loggedUser['codigoPostal']) ? $loggedUser['codigoPostal'] : "" ?>">
-              <?php if (isset($erroresPerfil["codigoPostal"])): ?>
-                <span class="error-message"><?=$erroresPerfil["codigoPostal"]?></span>
+            <div class="field-block">
+              <label for="">CODIGO POSTAL</label>
+              <input class="form-field" type="text" name="CP"
+              value="<?=$user->getCP() ?>">
+              <?php if (isset($erroresPerfil["CP"])): ?>
+                <span class="error-message"><?=$erroresPerfil["CP"]?></span>
               <?php endif; ?>
             </div>
 
-            <div class='feld-block'>
-              <label for='pais'>País de nacimiento:</label>
-              <select name="pais">
-                <option value="">Elegí</option>
-                <?php foreach ($paises as $pais): ?>
-                  <?php if (isset($loggedUser['pais']) && $loggedUser["pais"] == $pais ):; ?>
-                    <option value="<?=$pais?>" selected ><?=$pais?></option>
-                  <?php else: ?>
-                    <option value="<?=$pais?>"><?=$pais?></option>
-                  <?php endif; ?>
-                <?php endforeach; ?>
-              </select>
-            </div>
 
 
           <!-- cambio de contraseña -->
             <div class="feld-block">
-                <input class="form-field" type="password" name="password" placeholder="CAMBIAR PASSWORD">
+              <label for=""> CAMBIAR PASSWORD</label>
+                <input class="form-field" type="password" name="password" >
               <?php if (isset($erroresPerfil["password"])): ?>
                 <span class="error-message"><?=$erroresPerfil["password"]?></span>
               <?php endif; ?>
@@ -135,7 +121,8 @@ $loggedUser=traerUsuario($_SESSION["userId"]);
 
             <!-- repassword -->
             <div class="feld-block">
-              <input class="form-field" type="password" name="repassword" placeholder="CONFIRMAR NUEVO PASSWORD">
+              <label for="">CONFIRMAR PASSWORD</label>
+              <input class="form-field" type="password" name="repassword" >
               <?php if (isset($erroresPerfil["repassword"])): ?>
                 <span class="error-message"><?=$erroresPerfil["repassword"]?></span>
               <?php endif; ?>

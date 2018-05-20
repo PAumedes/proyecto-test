@@ -1,6 +1,6 @@
 <?php
   $title="quienes somos";
-  
+  Auth::session_start();
 ?>
 <!DOCTYPE html>
 <html>

@@ -1,11 +1,53 @@
 <?php
+require_once('Users.php');
+require_once('User.php');
 
     abstract class Validator
     {
-        public static function validateRegister($data)
+      //Recibe un User con datos cargados del form de registro.
+      //Recibe ademas el contenido del campo rePassword, para validar contra el password.
+      //deuvuelve los errores que arrojen las validaciones
+      //si no hay error devuelve array vacio.
+      function validateRegister(User $user, $rePass)
+      {
+        $errors=[];
+        if (!$user->getUsername())
         {
-
+          $errors["username"]="ingresa un nombre de usuario";
         }
+        elseif (Users::getByUsernameOrEmail($user->getUsername()))
+        {
+          $errors["username"]="El nombre de usuario ya esta registrado, por favor, elija otro nombre";
+        }
+
+        if (!$user->getEmail())
+        {
+          $errors["email"]="ingresa un email";
+        }
+        elseif (! filter_var($user->getEmail(),FILTER_VALIDATE_EMAIL))
+        {
+          $errors["email"]="ingresa un email valido";
+        }
+        elseif (Users::getByUsernameOrEmail( $user->getEmail() ) )
+        {
+          $errors["email"]="El email ya esta registrado";
+        }
+
+        if (!$user->getPassword())
+        {
+          $errors["password"]="ingresa un password";
+        }
+        elseif ( strlen( $user->getPassword() ) < 7 )
+        {
+          $errors["password"]="El password debe tener al menos 7 caracteres";
+        }
+        elseif ($user->getPassword()!=$rePass) {
+
+          $errors["repassword"]="las contraseñas no coinciden";
+        }
+        return $errors;
+      }
+
 
         //recibe la informacion de POST del form login.
         //valida los campos, devuelve los posibles errores en un array.
@@ -77,7 +119,7 @@
               }
               if (trim($data["password"])!=trim($data["repassword"]))
               {
-                $errors["rePassword"]= "Las conttraseñas no coinciden";
+                $errors["repassword"]= "Las conttraseñas no coinciden";
               }
             }
           return $errors;
