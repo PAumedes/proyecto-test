@@ -1,11 +1,6 @@
 <?php
-
-  session_start();
-
-  setcookie("userId",'',time()-10);
-
-  session_destroy();
-
+require_once('classes/Auth.php')
+  Auth::logout();
   header("location: index.php");
   exit;
  ?>

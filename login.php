@@ -1,25 +1,32 @@
 <?php
 $title="ingresa";
 
-require_once("partials/functions.php");
+require_once("classes/Auth.php");
+require_once("classes/Validator.php");
+require_once("classes/Users.php");
+require_once("classes/User.php");
 
-if(isset($_SESSION["userId"])){
+// si hay usuario logeado redirigir a index.
+if( $user = Auth::loggedUser() )
+{
   header("location:index.php");
   exit;
 }
 
-$user["user"]="";
-if ($_POST){
-  $user["user"]=trim($_POST["user"]);
-  $user["password"]=trim($_POST["password"]);
-  if(isset($_POST["recordar"])){$user["recordar"]=$_POST["recordar"];}
-  $erroresLogin = validarLogin($user);
-  if (!$erroresLogin){
+$oldUser="";
+if ($_POST)
+{
+  $oldUser = $_POST['user'];
+  $erroresLogin = Validator::validateLogin($_POST);
+  if (!$erroresLogin)
+  {
+    $user = Users::getByUsernameOrEmail(trim($_POST['user']));
+    Auth::login($user,isset($_POST["recordar"]));
     header("location: perfil.php");
     exit;
   }
-
 }
+
 //inicializo las variables de error
 if(!isset($erroresLogin["user"])) {$erroresLogin["user"]="";}
 if(!isset($erroresLogin["password"])) {$erroresLogin["password"]="";}
@@ -41,7 +48,7 @@ if(!isset($erroresLogin["password"])) {$erroresLogin["password"]="";}
         <div class="form-group">
           <div class="field-block">
             <label for="user">USUARIO O EMAIL</label>
-            <input id="user" name="user" class="form-field " type="text" value=" <?=$user['user']?> ">
+            <input id="user" name="user" class="form-field " type="text" value=" <?=$oldUser?> ">
             <span class="error-message"><?=$erroresLogin["user"]?></span>
           </div>
 

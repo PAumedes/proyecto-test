@@ -1,5 +1,6 @@
 <?php
     require_once('User.php');
+    require_once('Db.php');
 
     abstract class Users
     {
@@ -64,7 +65,7 @@
             $query->bindValue(':CP',$user->getCP(),PDO::PARAM_STR);
 
             $query->bindValue(':address',$user->getAddress(),PDO::PARAM_STR);
-        
+
             $query->execute();
 
             $db->commit();
@@ -76,11 +77,31 @@
 
         }
 
-
+        // devuelve un array de objetos Usuario.
+        // conteniendo todos los usuarios en la base de datos.
         public static function getAll()
         {
+          $db = Db::connect();
+          $queryText = "SELECT u.id,u.username,u.email,u.password,u.user_type, u.avatar,
+                               p.first_name,p.last_name,p.CP,p.phone,p.address
+                        FROM users as u
+                        INNER JOIN profiles  as p on u.id = p.user_id; ";
+           try {
+             $query = $db->prepare($queryText);
+             $queryt->execute();
+             $result = $query->fetchAll(PDO::FETCH_ASSOC);
+           } catch (\Exception $e) {
 
+           }
+           $users=[];
+              foreach ($result as $userArray)
+              {
+                $user = new User();
+                $users[]=$user->loadFromArray($userArray);
+              }
+              return $users;
         }
+
 
         public static function getAllDjs()
         {
@@ -92,9 +113,36 @@
 
         }
 
-        public static function getByID()
-        {
 
+
+        // recive un campo de referencia de busqueda y un valor.
+        // devuelve un objeto usuario
+        public static function getByUsernameOrEmail(string $value)
+        {
+          $db = Db::connect();
+          $queryText = "SELECT u.id,u.username,u.email,u.password,u.user_type, u.avatar,
+                               p.first_name,p.last_name,p.CP,p.phone,p.address
+                        FROM users as u
+                        INNER JOIN profiles  as p on u.id = p.user_id
+                        WHERE u.username = :value OR u.email = :value;";
+          try
+          {
+            $query = $db->prepare($queryText);
+            //$field = 'u.'.$field;
+            $query->bindValue(':value',$value,PDO::PARAM_STR);
+            $query->execute();
+          } catch (PDOException $e) {
+            echo $e->getMessage();exit;
+          }
+
+          $result = $query->fetch(PDO::FETCH_ASSOC);
+          if ($result)
+          {
+              $user = new User;
+              $user->loadFromArray($result);
+              return $user;
+          }
+          else {return false;}
         }
 
         public static function save($user)

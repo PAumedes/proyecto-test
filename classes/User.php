@@ -141,12 +141,13 @@
             $this->avatar = $newAvatar;
         }
 
+
         public function loadFromArray(array $array)
         {
           $this->username = $array["username"];
           $this->password = $array["password"];
           $this->email = $array["email"];
-          $this->userType = $array["userType"];
+          if (isset($array["userType"])){$this->userType = $array["userType"];}
           if (isset($array["firstname"])){$this->firstname = $array["firstname"];}
           if (isset($array["lastname"])){$this->lastname = $array["lastname"];}
           if (isset($array["address"])){$this->address = $array["address"];}
