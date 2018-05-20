@@ -64,7 +64,7 @@
             $query = $db->prepare($queryText);
             $query->bindValue(':user_id',$userID,PDO::PARAM_INT);
             $query->bindValue(':first_name',$user->getFirst_name(),PDO::PARAM_STR);
-            $query->bindValue(':last_name',$user->getLastName(),PDO::PARAM_STR);
+            $query->bindValue(':last_name',$user->getLast_name(),PDO::PARAM_STR);
             $query->bindValue(':CP',$user->getCP(),PDO::PARAM_STR);
 
             $query->bindValue(':address',$user->getAddress(),PDO::PARAM_STR);

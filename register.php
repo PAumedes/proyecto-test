@@ -11,22 +11,24 @@ if (Auth::loggedUser()){header('location: index.php');}
 //inicializacion de variables
 $options = ["DJ"=>"Soy DJ!","eventr"=>"Busco Dj's para eventos!"];
 
-$user = new User();
+
+$userData = new User();
 
 if($_POST){
 
-  $user->setUsername(trim($_POST["username"]));
-  $user->setEmail(trim($_POST["email"]));
-  $user->setPassword(trim($_POST["password"]));
-  $user->setUsertype(trim($_POST["option"]));
+  $userData->setUsername(trim($_POST["username"]));
+  $userData->setEmail(trim($_POST["email"]));
+  $userData->setPassword(trim($_POST["password"]));
+  $userData->setUsertype(trim($_POST["option"]));
 
-  $erroresRegister = Validator::validateRegister($user,$_POST["repassword"]);
+  $erroresRegister = Validator::validateRegister($userData,$_POST["repassword"]);
   if (!$erroresRegister){
-    Users::create($user);
+    Users::create($userData);
     header("location: welcome.php");
     exit;
   }
 }
+
 //renicializo las vriables de error si no estan definidas en el array devuelto por la validacion.
 // o si directamente no se hizo validacion por no haber datos en POST
 if (!isset($erroresRegister["username"])){$erroresRegister["username"]="";}
@@ -54,13 +56,13 @@ if (!isset($erroresRegister["repassword"])){$erroresRegister["repassword"]="";}
           <div class="form-group">
             <div class="field-block">
               <label for="username">Elige un nombre de usuario</label>
-              <input class="form-field" name="username" type="text" id="username" value=<?=$user->getUsername()?> >
+              <input class="form-field" name="username" type="text" id="username" value=<?=$userData->getUsername()?> >
               <span class="error-message"><?=$erroresRegister["username"]?></span>
             </div>
 
             <div class="field-block">
                 <label for="email">Un email para tu cuenta</label>
-                <input class="form-field" name="email" type="email" value=<?=$user->getEmail()?> >
+                <input class="form-field" name="email" type="email" value=<?=$userData->getEmail()?> >
                 <span class="error-message"><?=$erroresRegister["email"]?></span>
             </div>
 
@@ -81,7 +83,7 @@ if (!isset($erroresRegister["repassword"])){$erroresRegister["repassword"]="";}
               <div class="" data-toggle="buttons">
                 <?php foreach ($options as $key => $value): ?>
                   <label class="" >
-                    <?php if ($key == $user->getUserType()): ?>
+                    <?php if ($key == $userData->getUserType()): ?>
                       <input type="radio" name="option" value="<?=$key?>"  autocomplete="off" checked="" > <?=$value?>
                     <?php else: ?>
                       <input type="radio" name="option" value="<?=$key?>"  autocomplete="off" > <?=$value?>
