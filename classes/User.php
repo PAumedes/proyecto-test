@@ -200,7 +200,7 @@ require_once('Db.php');
             if ( isset($_FILES[$image]) && trim($_FILES[$image]["name"] ) )
             {
                 $extension = pathinfo($_FILES[$image]["name"],PATHINFO_EXTENSION);
-                $path= dirname(__file__ , 2) . "/images/" . $user["username"] . "." . $extension;
+                $path= dirname(__file__ , 2) . "/images/" . $this->username . "." . $extension;
                 move_uploaded_file($_FILES[$image]["tmp_name"], $path);
                 $this->setAvatar(strstr($path,"images"));
                 $userUpdates[]='avatar';
