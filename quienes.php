@@ -1,5 +1,8 @@
 <?php
+require_once('classes/Db.php');
+if(!Db::existsDB() || !Db::existsTable('users')){  header('location: crearDB.php');  }
   $title="quienes somos";
+
   
 ?>
 <!DOCTYPE html>

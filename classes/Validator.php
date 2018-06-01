@@ -8,7 +8,7 @@ require_once('User.php');
       //Recibe ademas el contenido del campo rePassword, para validar contra el password.
       //deuvuelve los errores que arrojen las validaciones
       //si no hay error devuelve array vacio.
-      function validateRegister(User $user, $rePass)
+      static function validateRegister(User $user, $rePass)
       {
         $errors=[];
         if (!$user->getUsername())

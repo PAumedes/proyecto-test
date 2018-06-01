@@ -1,4 +1,6 @@
 <?php
+require_once('classes/Db.php');
+if(!Db::existsDB() || !Db::existsTable('users')){  header('location: crearDB.php');  }
   require_once("partials/navigation.php");
   $title="Preguntas frecuentes";
   $faq = [

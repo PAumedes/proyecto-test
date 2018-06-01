@@ -2,7 +2,6 @@
 
     class Db
     {
-
       // devuelve true si existe la base de datos eventr_db
       public static function existsDB()
       {
@@ -22,7 +21,8 @@
         $db = self::connect();
         $queryText="SELECT TABLE_NAME
                     FROM information_schema.tables
-                    WHERE table_name like :table";
+                    WHERE table_name like :table
+                    AND table_schema LIKE 'eventr_db'";
         try
         {
           $query = $db->prepare($queryText);
@@ -70,6 +70,22 @@
                 return false;
                 // echo "<p>¡ERROR!</p>"; exit;
             }
+        }
+
+        // Chequea si los datos ya fueron migrados desde JSON a la base de Datos
+        public static function migrated()
+        {
+          $db = self::connect();
+          $queryText="SELECT *
+                      FROM users";
+          try
+          {
+            $query = $db->prepare($queryText);
+            $query->execute();
+            return ($query->fetch(PDO::FETCH_ASSOC) != NULL);
+          } catch (\Exception $e) {
+            return $e->getMessage();
+          }          
         }
 
 

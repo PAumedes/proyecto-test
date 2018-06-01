@@ -1,4 +1,3 @@
-/*formulario al cual redirijo si no esta creada la DB*/
 <?php
 $title = "crear DB";
 
@@ -10,35 +9,43 @@ $message="";
 
 if(isset($_POST['db'])){
   Db::createDB();
-  $message = "DB creada";
+  $message = "La base de datos ha sido creada";
 }
 
 
 if(isset($_POST['table']))
 {
   if(!Db::existsDB()){
-    $message = "Primero crea la db";
+    $message = "Primero debe crear la base de datos.";
   } else{
     Db::createTable();
-    $message = "Tablas creadas";
+    $message = "Las tablas han sido creadas correctamente";
   }
 }
 
 
 
-if(isset($_POST['migrate']) )
-{
-  if(!Db::existsDB())
+if(isset($_POST['migrate']))
   {
-    $message = 'Primero se debe crear la DB';
-  }elseif (!Db::existsTable('users')) {
-    $message = 'Primero se debe crear la tabla de usuarios';
-  }else{
-
-    if ($error = !Users::migrateJSON()){$message="JSON migrado";}
-    else{$message = $error;}
+    if(!Db::existsDB())
+    {
+      $message = "Primero debe crear la base de datos.";
+    }
+    elseif (!Db::existsTable('users')) 
+    {
+      $message = 'Primero se debe crear la tabla de usuarios.';
+    }
+    else
+    {
+      if ($error = !Users::migrateJSON())
+        {
+          $message="El JSON ha sido migrado exitosamente";
+          header("location: index.php");
+          exit;
+        }
+      else{$message = $error;}
+    }
   }
-}
 
 
 
@@ -56,9 +63,9 @@ if(isset($_POST['migrate']) )
   <body>
     <h2><?=$message?></h2>
     <form class="" action="" method="post">
-      <button type="submit" name="db">crear db</button>
-      <button type="submit" name="table"> crear tablas</button>
-      <button type="submit" name="migrate"> migrar json a db</button>
+      <button type="submit" name="db">Crear DB</button>
+      <button type="submit" name="table"> Crear tablas</button>
+      <button type="submit" name="migrate"> Migrar JSON a DB</button>
     </form>
   </body>
 </html>
